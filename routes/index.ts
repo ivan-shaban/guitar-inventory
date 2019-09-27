@@ -1,7 +1,7 @@
-import {Router} from "express";
+import { Router } from 'express';
 
 export const indexRouter = Router()
 /* GET home page. */
-    .get('/', function (req, res, next) {
-        res.render('index', {title: 'Express'});
+    .get('/', (req, res, next) => {
+        res.render('index', { title: 'Express' });
     });

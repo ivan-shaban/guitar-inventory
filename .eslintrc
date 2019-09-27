@@ -1,0 +1,27 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:import/errors",
+    "plugin:import/typescript"
+  ],
+  "rules": {
+    "@typescript-eslint/consistent-type-assertions": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "import/order": ["error", {"newlines-between": "always"}],
+    "quotes": ["error", "single"],
+    "object-curly-newline": ["error", { "multiline": true, "minProperties": 2, "consistent": true }],
+    "object-curly-spacing": ["error", "always"],
+    "arrow-parens": ["error", "always"],
+    "prefer-arrow-callback": ["error"]
+  }
+}

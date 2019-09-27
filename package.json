@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon --exec babel-node bin/www.ts --extensions .ts",
-    "start:ts": "nodemon --exec babel-node ./src/index.ts --extensions .ts"
+    "start:ts": "nodemon --exec babel-node ./src/index.ts --extensions .ts",
+    "lint:ts": "eslint \"**/*.{tsx,ts}\" --quiet --fix"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -34,7 +35,12 @@
     "@types/morgan": "^1.7.37",
     "@types/node": "^12.7.5",
     "@types/uuid": "^3.4.5",
+    "@typescript-eslint/eslint-plugin": "^2.3.1",
+    "@typescript-eslint/parser": "^2.3.1",
+    "babel-eslint": "^10.0.3",
     "cors": "^2.8.5",
+    "eslint": "^6.4.0",
+    "eslint-plugin-import": "^2.18.2",
     "nodemon": "^1.19.2",
     "typescript": "^3.6.3"
   }

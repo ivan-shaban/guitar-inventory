@@ -1,13 +1,12 @@
 #!/usr/bin/env node
+import { createServer } from 'http';
 
-/**
- * Module dependencies.
- */
-import {app} from "../app";
+import debug0 from 'debug';
 
-import {createServer} from "http";
+import { app } from '../app';
 
-import debug0 from "debug";
+import { normalizePort } from './utils';
+import ErrnoException = NodeJS.ErrnoException;
 
 const debug = debug0('guitar-inventory:server');
 /**
@@ -17,43 +16,9 @@ const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
- * Create HTTP server.
- */
-const server = createServer(app);
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
-
-/**
- * Normalize a port into a number, string, or false.
- */
-
-function normalizePort(val: any) {
-    const port = parseInt(val, 10);
-
-    if (isNaN(port)) {
-        // named pipe
-        return val;
-    }
-
-    if (port >= 0) {
-        // port number
-        return port;
-    }
-
-    return false;
-}
-
-/**
  * Event listener for HTTP server "error" event.
  */
-
-function onError(error) {
+const onError = (error: ErrnoException) => {
     if (error.syscall !== 'listen') {
         throw error;
     }
@@ -75,16 +40,27 @@ function onError(error) {
         default:
             throw error;
     }
-}
+};
 
 /**
  * Event listener for HTTP server "listening" event.
  */
-
-function onListening() {
+const onListening = () => {
     const addr = server.address()!;
     const bind = typeof addr === 'string'
         ? 'pipe ' + addr
         : 'port ' + addr.port;
     debug('Listening on ' + bind);
-}
+};
+
+/**
+ * Create HTTP server.
+ */
+const server = createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
