@@ -1,24 +1,30 @@
 #!/usr/bin/env node
-import { createServer } from 'http';
+import { createServer } from 'http'
 
-import debug0 from 'debug';
+import debug0 from 'debug'
+import dotenv from 'dotenv'
 
-import { app } from '../app';
+import { app } from '../app'
+import { register } from '../middleware/sessionAuth'
 
-import { normalizePort } from './utils';
-import ErrnoException = NodeJS.ErrnoException;
+import { normalizePort } from './utils'
 
 const debug = debug0('guitar-inventory:server');
+
+// initialize configuration
+dotenv.config();
+register(app)
+
 /**
  * Get port from environment and store in Express.
  */
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT);
 app.set('port', port);
 
 /**
  * Event listener for HTTP server "error" event.
  */
-const onError = (error: ErrnoException) => {
+const onError = (error: unknown) => {
     if (error.syscall !== 'listen') {
         throw error;
     }
@@ -51,6 +57,7 @@ const onListening = () => {
         ? 'pipe ' + addr
         : 'port ' + addr.port;
     debug('Listening on ' + bind);
+    console.log('Listening on ' + bind);
 };
 
 /**

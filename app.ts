@@ -1,14 +1,18 @@
-import path from 'path';
+import path from 'path'
 
-import createError from 'http-errors';
+import createError from 'http-errors'
 import express, {
-NextFunction, Request, Response
-} from 'express';
-import cookieParser from 'cookie-parser';
-import logger from 'morgan';
+    NextFunction,
+    Request,
+    Response,
+} from 'express'
+import cookieParser from 'cookie-parser'
+import logger from 'morgan'
 
-import { indexRouter } from './routes';
-import { usersRouter } from './routes/users';
+import { indexRouter } from './routes'
+import { loginRouter } from './routes/login'
+import { logoutRouter } from './routes/logout'
+import { guitarsRouter } from './routes/guitars'
 
 export const app = express();
 
@@ -23,7 +27,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/login', loginRouter);
+app.use('/logout', logoutRouter);
+app.use('/guitars', guitarsRouter);
 
 // catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: NextFunction) => {
