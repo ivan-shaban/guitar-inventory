@@ -8,17 +8,24 @@ import express, {
 } from 'express'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
+import dotenv from 'dotenv'
 
 import { indexRouter } from './routes'
 import { loginRouter } from './routes/login'
 import { logoutRouter } from './routes/logout'
 import { guitarsRouter } from './routes/guitars'
+import { registerSession } from './middleware/sessionAuth'
+
+// initialize configuration
+dotenv.config();
 
 export const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+registerSession(app)
 
 app.use(logger('dev'));
 app.use(express.json());

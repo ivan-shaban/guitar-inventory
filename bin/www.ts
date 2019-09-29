@@ -2,18 +2,12 @@
 import { createServer } from 'http'
 
 import debug0 from 'debug'
-import dotenv from 'dotenv'
 
 import { app } from '../app'
-import { register } from '../middleware/sessionAuth'
 
 import { normalizePort } from './utils'
 
 const debug = debug0('guitar-inventory:server');
-
-// initialize configuration
-dotenv.config();
-register(app)
 
 /**
  * Get port from environment and store in Express.

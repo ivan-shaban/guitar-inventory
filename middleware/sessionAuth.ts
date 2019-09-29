@@ -2,7 +2,7 @@ import { Application } from 'express'
 import { ExpressOIDC } from '@okta/oidc-middleware'
 import session from 'express-session'
 
-export const register = (app: Application) => {
+export const registerSession = (app: Application) => {
     // Create the OIDC client
     const oidc = new ExpressOIDC({
         client_id: process.env.OKTA_CLIENT_ID,
