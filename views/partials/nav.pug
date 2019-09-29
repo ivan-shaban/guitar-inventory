@@ -1,0 +1,15 @@
+nav
+    .nav-wrapper
+        a.brand-logo( href="/")
+            if user
+                #{user.name} 's
+            Guitar Inventory
+        ul#nav-mobile.right.hide-on-med-and-down
+            li
+                a(href="/guitars") My Guitars
+            if isAuthenticated
+                li
+                    a(href="/logout") Logout
+            else
+                li
+                    a(href="/login") Login

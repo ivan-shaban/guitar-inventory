@@ -1,0 +1,61 @@
+html
+head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+    body
+        include partials/nav.pug
+        .container
+            #app
+                .row#guitarList
+                    h3 Guitar list
+                    table(v-if="hasGuitars")
+                        thead
+                            tr
+                                th Year
+                                th Brand
+                                th Model
+                                th Color
+                                th
+                        tbody
+                            tr(v-for="guitar in guitars")
+                                td {{ guitar.year1111 }}
+                                td {{ guitar.brand }}
+                                td {{ guitar.model }}
+                                td {{ guitar.color }}
+                                td
+                                    button#guitarDelete.btn-small(@click="confirmDeleteGuitar(guitar.id)")
+                                        i.material-icons.right delete
+                                        | Delete
+                    p(v-if="noGuitars") No guitars yet!
+                #guitarEdit.row
+                    h3 Add a guitar
+                    form.col.s12(@submit.prevent="addGuitar")
+                        .row
+                            .input-field.col.s6
+                                input#year.validate(v-model="year", ref="year", placeholder="2005", type="text")
+                                label(for="brand") Year
+                            .input-field.col.s6
+                                input#brand.validate(v-model="brand", ref="brand", placeholder="Paul Reed Smith", type="text")
+                                label(for="brand") Brand
+                        .row
+                            .input-field.col.s6
+                                input#model.validate(v-model="model", ref="model", placeholder="Custom 24", type="text")
+                                label(for="model") Model
+                            .input-field.col.s6
+                                input#color.validate(v-model="color", ref="color", placeholder="Whale Blue", type="text")
+                                label(for="model") Color
+                        button#guitarEditSubmit.btn(type="submit")
+                            i.material-icons.right send
+                            | Submit
+                #deleteConfirm.modal(ref="deleteConfirm")
+                    .modal-content
+                        h4 Confirm delete
+                        p Delete {{ selectedGuitar }}?
+                    .modal-footer
+                        button.modal-close.btn-flat(@click="deleteGuitar(selectedGuitarId)") Ok
+                        button.modal-close.btn-flat Cancel
+        script(src="javascripts/index.js")
